@@ -60,7 +60,7 @@ function typeOf(value){ //takes in a value and returns the data type of the argu
  * first: function takes in an array and a number and returns the first [input number] indexes of that array
  * 
  * @param {an array and a number} function takes in an array and a number
- * @returns {an array or a value} function returns an array or the zero index of the input array
+ * @returns {an array or a value} function returns an array containing the specified number of indexes from the front of the input array, or the zero index of the input array if no number of indexes was specified.
  */
 function first(anArray, aNum){
     let retArray = [];
@@ -81,8 +81,8 @@ function first(anArray, aNum){
 /**
  * last: function takes in an array and a number and returns the last [input number] indexes of that array as an array
  * 
- * @param {an array and a number} function takes in an array and a number
- * @returns {an array or a value} function returns an array or the zero index of the input array
+ * @param {an array and a number} function takes in an array and a number representing the number of index to be returned.
+ * @returns {an array or a value} function returns an array containing the specified number of indexes from the back of the input array, or the last index of the input array if no number of indexes was specified.
  */
 
  function last(anArray, aNum){
@@ -90,7 +90,7 @@ function first(anArray, aNum){
     if(!Array.isArray(anArray)){
         return [];
     }
-    // check if number argument is undefinded or is not a number and if not return array index zero
+    // check if number argument is undefinded or is not a number and if not return he last index of the array.
     if(typeof aNum !== "number"){
         return anArray[anArray.length - 1];
     }
@@ -250,7 +250,7 @@ function pluck(objArr, keyname){
 
 
 /**
- * every: function takes in a collection and a fucntion, passes each element of the collection to the function and returns true if all function calls returned true.
+ * every: function takes in a collection and a function, passes each element of the collection to the function and returns true if all function calls returned true.
  * 
  * @param {a collection and a function} function takes in a collection and a function
  * @returns {a boolean} function returns a boolean
@@ -299,7 +299,7 @@ function every(collection, func){
 
 
 /**
- * some: function takes in a collection and a fucntion, passes each element of the collection to the function and returns true if any function calls returned true.
+ * some: function takes in a collection and a function, passes each element of the collection to the function and returns true if any function calls returned true.
  * 
  * @param {a collection and a function} function takes in a collection and a function
  * @returns {a boolean} function returns a boolean
@@ -347,10 +347,12 @@ function some(collection, func){
 }
 
 /**
- * reduce: function takes in an array and a function and a number, and returns a number that is the input number combined with values of the array via the input function
+ * reduce: function takes in an array and a function and a seed value, and returns a value that is accumulated via the input function
  * 
- * @param {a collection, a function, and a number} function takes in an array, a function, and a number
- * @returns {a number} function returns a number
+ * @param {an array} function takes in an array  
+ * @param {a function}  function takes in a callback function to be used at each iteration of the reduction
+ * @param {a value} function takes in a seed value to hold the accumulated changes made by the callback function
+ * @returns {a value} function returns a value that is accumulated via the input function
  */
 
 function reduce(array, func, seed){
@@ -374,6 +376,18 @@ function reduce(array, func, seed){
 /**
  * extend: function takes in any number of objects, and returns the first object with all of the properties of the input objects
  * 
- * @param {objects} function takes any number of objects
+ * @param {objects} function takes in a target object to have properties copied into
+ * @param { n objects }function takes in any number of objects from which the properties will be copied from
  * @returns {an object} function returns an object
  */
+
+ function extend(object1, object2){
+      
+    for(let i = 0; i < arguments.length; i++){
+        for(var key in arguments[i]){
+            object1[key] = arguments[i][key];
+        }
+    }
+
+    return object1;
+}   
